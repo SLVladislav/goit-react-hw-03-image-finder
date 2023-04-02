@@ -1,59 +1,48 @@
 import { Component } from 'react';
+import { BsSearch } from 'react-icons/bs';
 import PropTypes from 'prop-types';
-import { toast } from 'react-toastify';
-import { FaSearch } from 'react-icons/fa';
-import css from './Searchbar.module.css';
 
-class Searchbar extends Component {
+import { Header, Form, SearchButton, Input } from './Searchbar.styled';
+
+export class Searchbar extends Component {
   static propTypes = {
     onSubmit: PropTypes.func.isRequired,
   };
 
   state = {
-    query: '',
+    input: '',
   };
 
-  onChangeInput = e => {
-    this.setState({ query: e.currentTarget.value });
+  handleChange = e => {
+    this.setState({ input: e.currentTarget.value.toLowerCase() });
   };
 
-  onSubmitForm = e => {
+  handleSubmit = e => {
     e.preventDefault();
 
-    const { onSubmit } = this.props;
-    const { query } = this.state;
+    this.props.onSubmit(this.state.input);
 
-    if (query.trim() === '') {
-      toast.error('Enter a search term.');
-      return;
-    }
-
-    onSubmit(query);
+    this.setState({ input: '' });
   };
 
   render() {
-    const { query } = this.state;
-
     return (
-      <header className={css.header}>
-        <form className={css.form} onSubmit={this.onSubmitForm}>
-          <button className={css.button} type="submit">
-            <FaSearch size={12} />
-          </button>
+      <Header>
+        <Form onSubmit={this.handleSubmit}>
+          <SearchButton type="submit">
+            <BsSearch size={'2em'} />
+          </SearchButton>
 
-          <input
-            className={css.input}
+          <Input
             type="text"
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
-            value={query}
-            onChange={this.onChangeInput}
+            value={this.state.input}
+            onChange={this.handleChange}
           />
-        </form>
-      </header>
+        </Form>
+      </Header>
     );
   }
 }
-
-export default Searchbar;

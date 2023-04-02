@@ -1,12 +1,18 @@
-import { MdOutlineCameraswitch } from 'react-icons/md';
-import css from './Loader.module.css';
+import { Oval } from 'react-loader-spinner';
 
-function Loader() {
+export const Loader = () => {
   return (
-    <div className={css.wrapper}>
-      <MdOutlineCameraswitch className={css.loader} />
-    </div>
+    <Oval
+      height={150}
+      width={150}
+      color="#3f51b5"
+      wrapperStyle={{ display: 'flex', justifyContent: 'center' }}
+      wrapperClass=""
+      visible={true}
+      ariaLabel="oval-loading"
+      secondaryColor="#3f51b5"
+      strokeWidth={2}
+      strokeWidthSecondary={2}
+    />
   );
-}
-
-export default Loader;
+};
