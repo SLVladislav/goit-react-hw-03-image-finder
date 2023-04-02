@@ -28,7 +28,6 @@ export class ImageGallery extends Component {
   };
 
   async componentDidUpdate(prevProps, prevState) {
-    console.log(this.state);
     if (
       this.state.status === Status.RESOLVED &&
       this.state.images.length === this.state.totalHits &&
