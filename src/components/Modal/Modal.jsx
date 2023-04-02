@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import { Overlay, ModalWindow } from './Modal.styled';
 
@@ -35,13 +34,12 @@ export class Modal extends Component {
   render() {
     const { img, alt } = this.props;
 
-    return createPortal(
+    return (
       <Overlay onClick={this.handleBackdropClick}>
         <ModalWindow>
           <img src={img} alt={alt} />
         </ModalWindow>
-      </Overlay>,
-      modalRoot
+      </Overlay>
     );
   }
 }
